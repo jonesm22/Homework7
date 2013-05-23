@@ -1,0 +1,83 @@
+\documentclass{article}
+%\usepackage{amsmath}}
+
+\title{Sage 480 Final Project}
+\author{Melissa Jones}
+\date{May 22, 2013}
+
+\begin{document}
+
+\maketitle
+\section{Introduction}
+
+This paper is an overview of the basics of linear optimization. This paper will be some notes
+from a previous class for the use by my group in reviewing linear optimization
+
+\section{Basics of Linear Programs}
+
+\subsection{Linear Program in Tableaux Format}
+
+The Primal Linear program is of the form,
+
+   $$\textrm{max:\ } c^Tx$$
+   $$\textrm{ subject\ to:\ } Ax\leq b$$
+                $$x\geq 0$$
+
+Consider the given function and constraints,
+
+$$\textrm{max:\ } 3x_1+2x_2-4x_3 = z$$
+$$\textrm{subject\ to:\ }$$
+            $$x_1+4x_2\leq 5$$
+            $$ 2x_1+4x_2-2x_3\leq 6$$
+            $$ x_1+x_2-2x_3\leq 2$$
+
+Where the coefficents of the objective function is $c^T$. The coefficents
+of the constraint functions is matrix A
+and the inequality values is matrix b.
+
+Use these matrices to create a Tableaux of the form
+$$ \left[\begin{array}{ccc}
+    A & I & b \\
+    c & 0 & 0 \\
+    \end{array} \right]
+    $$
+
+So the tableaux form of our example is:
+$$ \left[ \begin{array}{ccccccc}
+    1&4&0&1&0&0&5\\
+    2&4&-2&0&1&0&6\\
+    1&1&-2&0&0&1&2\\
+    3&2&-4&0&0&0&0\\
+    \end{array} \right]
+$$
+
+\subsection{Dual to the Primal}
+
+Let me first introduce some theories that will be useful in effiecently solving our linear optimization problem.
+\begin{enumerate}
+
+\item Weak-Duality Theorem: Let P be a primal problem and D be its dual. If x if P-feasible and y is D-feasible, then $c^Tx\leqb^Ty$
+If we find a pair $(\bar{x},\bar{y})$ such that $\bar{x}$ is P-feasible and $\bar{y}$ is D-feasible and $c^T\bar{x}=b^T\bar{y}$, then $\bar{x}$ is P-optimal and $\bar{y}$ is D-optimal.
+
+\item Corollary: if P is unbounded then D is infeasible. Likewise, if D is unbounded then P is infeasible.
+
+\item Strong Duality Theorem: if either P or D have a finite optimal value, then so does the other, and in fact the optimal values coinside.
+\end{enumerate}
+
+The dual to the primial initial tableaux,
+
+        $$\textrm{min:\ }  b^Ty$$
+        $$\textrm{subject\ to:\ } A^T\geq c$$
+            $$y \geq 0$$
+
+Referring back to our example, the dual is:
+$$
+\left[ \begin{array}{ccccccc}
+    1&2&1&1&0&0&3\\
+    4&4&1&0&1&0&2\\
+    0&-2&-2&0&0&1&-4\\
+    5&6&2&0&0&0&0\\ \end{array}\right]
+$$
+    In order for a primal linear program to be dual feasible the objective function must have all non-positive coefficents. That is $c^T\leq 0$. Therefore our example is not dual feasible.
+
+\end{document}
